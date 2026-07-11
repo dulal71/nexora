@@ -1,29 +1,27 @@
 "use client";
 
-import { Switch } from "@heroui/react";
+
 import { useTheme } from "next-themes";
 import { FaMoon, FaSun } from "react-icons/fa6";
 
 const ThemeSwitch = () => {
      const { theme, setTheme } = useTheme();
     return (
-       <Switch onClick={() => setTheme(theme === "dark" ? "light" : "dark")}  size="lg">
-          {({isSelected}) => (
-            <Switch.Content>
-              <Switch.Control className={isSelected ? 'bg-amber-400' : 'bg-gray-400'}>
-                <Switch.Thumb>
-                  <Switch.Icon>
-                    {isSelected ? (
-                      <FaSun className="size-3 text-amber-400 opacity-100" />
-                    ) : (
-                      <FaMoon className="size-3 text-gray-400 opacity-70" />
-                    )}
-                  </Switch.Icon>
-                </Switch.Thumb>
-              </Switch.Control>
-            </Switch.Content>
-          )}
-        </Switch>
+      <button
+  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+  className={`
+    relative flex items-center justify-center
+    size-8 rounded-full
+    transition-colors duration-300
+    ${theme === "dark" ? "bg-gray-700" : "bg-amber-100"}
+  `}
+>
+  {theme === "dark" ? (
+    <FaMoon className="size-4 text-gray-200" />
+  ) : (
+    <FaSun className="size-4 text-amber-500" />
+  )}
+</button>
     );
 };
 

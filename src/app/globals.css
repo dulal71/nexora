@@ -1,2 +1,70 @@
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
+
+
+
+:root {
+  /* Light Mode */
+  --background: #F9F7F7;
+  --foreground: #112D4E;
+
+  --surface: #DBE2EF;
+
+  --primary: #3F72AF;
+  --primary-hover: #112D4E;
+
+  --accent: #3F72AF;
+  --success: #22C55E;
+}
+
+
+.dark {
+  /* Dark Mode */
+  --background: #0F172A;
+  --foreground: #F9F7F7;
+
+  --surface: #1E293B;
+
+  --primary: #3F72AF;
+  --primary-hover: #DBE2EF;
+
+  --accent: #60A5FA;
+  --success: #22C55E;
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@layer components {
+
+  .btn-primary {
+    @apply bg-[var(--primary)] text-white px-5 py-2.5 rounded-lg font-medium transition;
+  }
+
+  .btn-primary:hover {
+    @apply bg-[var(--dark)];
+  }
+
+
+  .btn-secondary {
+    @apply border border-[var(--primary)] text-[var(--dark)] px-5 py-2.5 rounded-lg transition;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-[var(--surface)];
+  }
+
+
+  .btn-dark {
+    @apply bg-[var(--dark)] text-white px-5 py-2.5 rounded-lg transition;
+  }
+
+  .btn-dark:hover {
+    @apply bg-[var(--primary)];
+  }
+
+}

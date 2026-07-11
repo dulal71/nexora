@@ -3,116 +3,66 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BiUser } from "react-icons/bi";
-import { FiMenu, FiShoppingBag, FiX } from "react-icons/fi";
+import { BiUser, BiSearch } from "react-icons/bi";
+import { FiMenu, FiShoppingBag, FiX, FiHeart } from "react-icons/fi";
 import ThemeSwitch from "./ThemeSwitch";
+import Logo from "./Logo";
+import NavActions from "./NavActions";
+import MobileMenu from "./MobileMenu";
+import DesktopMenu from "./DesktopMenu";
 
-
-  interface NavLink {
-  name: string;
-  path: string;
-}
 const Navbar = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-const [scrolled,setScrolled]=useState<boolean>(false)
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-const toggleMobileMenu=()=>{
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-}
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-useEffect(()=>{
-  const handleScroll = ()=>setScrolled(window.scrollY > 10)  
-  window.addEventListener('scroll',handleScroll)
-  return ()=>window.removeEventListener('scroll',handleScroll)
-},[])
-    const navLinks:NavLink[] = [
+ const openMenu = ()=>{
+setIsMobileMenuOpen(!isMobileMenuOpen)
+ }
+  const navLinks = [
     { name: 'HOME', path: '/' },
     { name: 'SHOP', path: '/shop' },
-    { name: 'BLOG', path: '/blog' },
- 
+    { name: 'FEATURES', path: '/features' },
+    { name: 'NEW IN', path: '/new-in' },
+
   ];
-    return (
-        <nav className={`sticky top-0 transition-all duration-300 z-50  border-b bg-white  border-gray-100 px-4 md:px-[8%] flex items-center justify-between
-       ${scrolled ? 'h-[55px] backdrop-blur-md shadow' : 'h-[70px] md:h-[90px] '}`}>
-      
-      {/* Mobile Menu Toggle Button */}
-      <button 
-        className="block md:hidden order-1 p-1 text-gray-800 hover:text-[#82a3c4] transition-colors"
-        onClick={toggleMobileMenu}
-        aria-label="Toggle Menu"
-      >
-        {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-      </button>
 
-      {/* Logo Wrapper */}
-      <div className="flex items-center font-sans text-2xl md:text-3xl font-bold text-gray-800 order-2 md:order-1 tracking-tight">
-        {/* <Image src='/images/logo1.png' width={150} height={150} alt='rongo image logo'></Image> */}
+  return (
+    <nav className="sticky top-0 z-50">
+      {/* Announcement Bar */}
+      <div className="bg-black text-white text-[10px] md:text-[12px] py-2 px-4 text-center overflow-hidden whitespace-nowrap">
+        10% OFF OUTERWEAR GET EM WHILE THEY'RE HOT ♦ FREE SHIPPING ON ALL ORDERS OVER $100
       </div>
 
-      {/* Navigation Links (Desktop + Mobile Dropdown Drawer) */}
-      <ul className={`
-        absolute md:static ${scrolled ? 'top-[55px]' : 'top-[70px]'} left-0 w-full md:w-auto bg-white md:bg-transparent
-        flex flex-col md:flex-row gap-0 md:gap-4 list-none m-0 p-0
-        border-b md:border-b-0 border-gray-200 shadow-md md:shadow-none
-        transition-all duration-300 ease-in-out overflow-hidden md:overflow-visible order-3 md:order-2
-        ${isMobileMenuOpen ? 'max-h-[350px]' : 'max-h-0 md:max-h-none'}
-      `}>
-        {navLinks.map((link) => {
-          const isActive = pathname === link.path;
-          
-          return (
-            <li key={link.name} className="w-full md:w-auto" onClick={() => setIsMobileMenuOpen(false)}>
-              <Link 
-                href={link.path} 
-                className={`
-                  block text-[18px] font-semibold tracking-wider transition-all duration-200
-                  px-5 md:px-[18px] py-4 md:py-2.5 w-full md:w-auto
-                  ${isActive 
-                    ? 'bg-[#82a3c4] text-white pl-7 md:pl-[18px]' 
-                    : 'text-black hover:bg-[#82a3c4] hover:text-white hover:pl-7 md:hover:pl-[18px]'
-                  }
-                `}
-              >
-                {link.name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    
-      {/* Right Side Tools Utilities */}
-      
-        {/* user  */}
-      <div className="flex items-center gap-3 md:gap-5 order-3">
-        <div className="relative">
+      {/* Main Navbar */}
+      <div className={`bg-white border-b border-gray-100 px-4 md:px-[8%] flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-[60px]' : 'h-[80px]'}`}>
+        
+        {/* Mobile Toggle */}
+        <button  aria-expanded={isMobileMenuOpen} className="md:hidden p-2" onClick={openMenu}>
+          {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
 
-      <Link href={'/profile'}>
-      <button className="p-1 text-gray-800 hover:text-[#82a3c4] transition-colors flex items-center cursor-pointer" aria-label="User">
-        <BiUser size={18}></BiUser>
-      </button>
-      </Link>
-    </div>
-        
-        <div className="w-[1px] h-[18px] md:h-[24px] bg-gray-200"></div>
-        {/* cart */}
-        <div className="relative flex items-center">
-        <button
-          
-          className="p-1 text-gray-800 hover:text-[#82a3c4] transition-colors flex items-center" aria-label="Cart">
-            <FiShoppingBag size={18} />
-          </button>
-          <span className="absolute -top-2 -right-2 text-[11px] font-medium text-gray-500">
-            0
-          </span>
+        {/* Logo */}
+         <Logo></Logo>
+
+        {/* Desktop Links */}
+        <DesktopMenu navLinks={navLinks}></DesktopMenu>
+
+        {/* Icons */}
+        <NavActions openMenu={openMenu} ></NavActions>
       </div>
-       <ThemeSwitch></ThemeSwitch>
-       </div>
+
       
-       
-        
- </nav>
-    );
+      {/* Mobile Menu Drawer - Smooth Transition */}
+       <MobileMenu navLinks={navLinks} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen}></MobileMenu>
+    </nav>
+  );
 };
 
 export default Navbar;

@@ -37,7 +37,7 @@ export default function useUserSignup() {
      
       } else {
         toast.success("Registration successful!");
-       
+       router.push('/login')
       }
     } catch (err) {
       console.error(err);
