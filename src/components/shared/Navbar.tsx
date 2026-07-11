@@ -10,6 +10,7 @@ import Logo from "./Logo";
 import NavActions from "./NavActions";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
+import OfferMarquee from "./OfferMarquee";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -36,9 +37,7 @@ setIsMobileMenuOpen(!isMobileMenuOpen)
   return (
     <nav className="sticky top-0 z-50">
       {/* Announcement Bar */}
-      <div className="bg-black text-white text-[10px] md:text-[12px] py-2 px-4 text-center overflow-hidden whitespace-nowrap">
-        10% OFF OUTERWEAR GET EM WHILE THEY'RE HOT ♦ FREE SHIPPING ON ALL ORDERS OVER $100
-      </div>
+      <OfferMarquee></OfferMarquee>
 
       {/* Main Navbar */}
       <div className={`bg-white border-b border-gray-100 px-4 md:px-[8%] flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-[60px]' : 'h-[80px]'}`}>
