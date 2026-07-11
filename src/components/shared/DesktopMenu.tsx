@@ -15,7 +15,7 @@ const DesktopMenu = ({navLinks}:DesktopMenuProps) => {
         <ul className="hidden md:flex gap-6 font-medium text-sm text-gray-800">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <Link href={link.path} className={`hover:text-[var(--accent)] ${pathname === link.path ? 'text-[var(--primary)]' : ''}`}>
+              <Link href={link.path} className={`hover:text-[var(--accent)] ${pathname === link.path ? 'text-[var(--primary)] dark:text-white' : 'dark:text-zinc-300'}`}>
                 {link.name}
               </Link>
             </li>

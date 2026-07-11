@@ -40,7 +40,7 @@ setIsMobileMenuOpen(!isMobileMenuOpen)
       <OfferMarquee></OfferMarquee>
 
       {/* Main Navbar */}
-      <div className={`bg-white border-b border-gray-100 px-4 md:px-[8%] flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-[60px]' : 'h-[80px]'}`}>
+      <div className={`bg-white dark:dark:bg-black  border-b border-gray-100 dark:border-none px-4 md:px-[8%] flex items-center justify-between  transition-all duration-500 ${scrolled ? 'h-[60px]' : 'h-[80px]'}`}>
         
         {/* Mobile Toggle */}
         <button  aria-expanded={isMobileMenuOpen} className="md:hidden p-2" onClick={openMenu}>

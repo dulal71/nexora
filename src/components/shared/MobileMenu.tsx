@@ -26,17 +26,17 @@ const MobileMenu = ({isMobileMenuOpen, setIsMobileMenuOpen,navLinks}:MobileMenuP
           animate={{ height: "auto", opacity: 1 }} 
           exit={{ height: 0, opacity: 0 }} 
           transition={{ duration:0.5, ease: "easeInOut" }} 
-          className="md:hidden absolute w-full bg-white border-b border-gray-200 shadow-md overflow-hidden z-40"
+          className="md:hidden absolute w-full bg-white dark:bg-black border-b border-gray-200 dark:border-gray-400 shadow-md overflow-hidden z-40 transition-colors duration-300"
         >
           {/* Mobile Search Bar */}
           <MobileSearchBar></MobileSearchBar>
-          <ul className="flex flex-col p-4 gap-4 font-semibold text-gray-800">
+          <ul className="flex flex-col p-4 gap-4 font-semibold text-gray-800 dark:text-gray-300">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block py-2 border-b border-gray-50 ${pathname === link.path ? 'text-[#82a3c4]' : ''}`}
+                  className={`block py-2 border-b border-gray-50 ${pathname === link.path ? 'text-[#82a3c4] dark:text-white' : ''}`}
                 >
                   {link.name}
                 </Link>
