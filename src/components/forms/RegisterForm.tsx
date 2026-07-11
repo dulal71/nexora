@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -9,8 +8,7 @@ import useUserSignup from '@/lib/authService/userSignup';
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string()
-  .min(10, "Phone number must be at least 10 digits")
+  phone: z.string().min(10, "Phone number must be at least 10 digits")
   .regex(/^\d+$/, "Phone number must contain only numbers"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string(),
@@ -28,8 +26,8 @@ const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
    });
   const onSubmit =async (data: RegisterFormValues) => {
-    console.log("Form Data:", data);
-    await signup(data)
+    const {confirmPassword,...userData}=data
+    await signup(userData)
 
   };
 
@@ -49,37 +47,46 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name */}
         <div>
+          <label className='text-white'>Name</label>
           <input {...register("name")} placeholder="Full Name" className={inputStyles} />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
         </div>
 
         {/* Email */}
         <div>
+          <label>Email</label>
           <input {...register("email")} placeholder="Email" className={inputStyles} />
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Phone */}
         <div>
+          <label>Phone</label>
           <input {...register("phone")} placeholder="Phone Number" className={inputStyles} />
           {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
         </div>
 
         {/* Password */}
         <div>
+          <label>Password</label>
           <input type="password" {...register("password")} placeholder="Password" className={inputStyles} />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
         </div>
 
         {/* Confirm Password */}
         <div>
+          <label>Confirm Password</label>
           <input type="password" {...register("confirmPassword")} placeholder="Confirm Password" className={inputStyles} />
           {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
         </div>
 
-        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors">
-          Register
-        </button>
+       <button disabled={isLoading}>
+
+           {
+         isLoading ? "Creating Account..." : "Register"
+           }
+
+           </button>
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-300 dark:border-gray-700"></div></div>
