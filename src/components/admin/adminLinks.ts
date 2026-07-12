@@ -40,9 +40,5 @@ export const adminLinks = [
     href: "/admin/settings",
     icon: FiSettings,
   },
-  {
-    name: "Logout",
-    href: "/logout",
-    icon: FiLogOut,
-  },
+  
 ];
