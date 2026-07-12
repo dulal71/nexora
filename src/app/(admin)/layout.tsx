@@ -13,11 +13,11 @@ const layout =async ({children}:LayoutProps) => {
             <header>
                <DashboardNavbar></DashboardNavbar> 
             </header>
-            <main>
+            <main className='flex '>
               <div>
                 <DashboardSidebar></DashboardSidebar>
                 </div>
-                <div>
+                <div className='flex-1 md:p-5 min-h-screen !bg-gray-50 dark:!bg-black py-5'>
                  {children}    
                     </div>  
             </main>

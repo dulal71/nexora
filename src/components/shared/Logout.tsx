@@ -1,10 +1,13 @@
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { FaSignOutAlt } from "react-icons/fa";
 import { toast } from "sonner";
 
+interface LogoutProps{
+    collapsed:boolean
+}
 
-
-const Logout = () => {
+const Logout = ({collapsed = false}:LogoutProps) => {
     const router = useRouter();
 
     const handleSignOut = async (): Promise<void> => {
@@ -22,13 +25,21 @@ const Logout = () => {
 
     return (
         <button
-            onClick={handleSignOut}
-            className="px-4 py-1 rounded-full font-medium transition-colors
-                       bg-black text-white hover:bg-gray-800
-                       dark:bg-white dark:text-black dark:hover:bg-gray-200"
-        >
-            Logout
-        </button>
+  onClick={handleSignOut}
+  className={`
+    flex  items-center rounded-xl px-3 py-2.5
+    hover:bg-default transition-all
+    ${collapsed ? "justify-center" : "gap-3"}
+  `}
+>
+  <FaSignOutAlt className="size-5 shrink-0 text-danger" />
+
+  {!collapsed && (
+    <span className="text-danger font-medium">
+      Log Out
+    </span>
+  )}
+</button>
     );
 };
 

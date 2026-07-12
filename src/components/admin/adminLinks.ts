@@ -1,3 +1,4 @@
+import { BiPlus } from "react-icons/bi";
 import {
   FiHome,
   FiBox,
@@ -18,6 +19,11 @@ export const adminLinks = [
     name: "Products",
     href: "/admin/products",
     icon: FiBox,
+  },
+  {
+    name: "Add Products",
+    href: "/admin/add-products",
+    icon: BiPlus,
   },
   {
     name: "Orders",
