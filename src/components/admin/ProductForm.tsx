@@ -1,7 +1,10 @@
 "use client";
 
+import { AddProduct } from "@/lib/action/addProduct";
+import { uploadImage } from "@/lib/service/imageUpload";
 import Image from "next/image";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 interface ProductFormData {
   name: string;
@@ -39,28 +42,62 @@ const ProductForm = () => {
   const [formData, setFormData] = useState<ProductFormData>(initialFormData);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
-  const handleChange = (
+   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    setFormData((prev) => ({ ...prev, images: files }));
 
-    if (files) {
-      const urls = Array.from(files).map((file) => URL.createObjectURL(file));
-      setPreviewUrls(urls);
+  const handleReset=()=>{
+    setFormData(initialFormData)
+    setPreviewUrls([])
+  }
+ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const files = e.target.files;
+  if (!files) return;
+
+  setFormData((prev) => ({ ...prev, images: files }));
+
+  setPreviewUrls((prevUrls) => {
+    prevUrls.forEach((url) => URL.revokeObjectURL(url));
+    return Array.from(files).map((file) => URL.createObjectURL(file));
+  });
+};
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  try {
+    setIsSubmitting(true); 
+
+    let uploadedUrls: string[] = [];
+
+    if (formData.images) {
+      const uploadPromises = Array.from(formData.images).map((file) => uploadImage(file));
+      const results = await Promise.all(uploadPromises);
+      uploadedUrls = results.map((res) => res.data.display_url);
     }
-  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form Data:", formData);
-    // এখানে API call বসবে
-  };
+    const finalData = {
+      ...formData,
+      images: uploadedUrls, 
+    };
+
+    const res = await AddProduct(finalData);
+    
+    if(res.insertedId){
+      toast.success("Product added successfully");
+      handleReset(); // <--- এখানে যোগ করুন, যাতে সেভ হওয়ার পর ফর্ম খালি হয়ে যায়
+    }
+  } catch (error) {
+    toast.error("Failed to add product");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="">
@@ -242,6 +279,8 @@ const ProductForm = () => {
               <div className="flex flex-wrap gap-3 mt-4">
                 {previewUrls.map((url, index) => (
                   <Image
+                  width={300}
+                  height={300}
                     key={index}
                     src={url}
                     alt={`Preview ${index + 1}`}
@@ -288,7 +327,7 @@ const ProductForm = () => {
           <div className="flex justify-end gap-3 pt-2 border-t border-gray-200 dark:border-gray-800">
             <button
               type="button"
-              onClick={() => setFormData(initialFormData)}
+              onClick={handleReset}
               className="px-5 py-2.5 rounded-lg text-sm font-medium border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
             >
               Reset

@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import useUserSignup from '@/lib/authService/userSignup';
+import { toast } from 'sonner';
+import useGoogleSignIn from '@/lib/authService/useGoogleSignIn';
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -22,19 +24,20 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
     const { signup, isLoading}=useUserSignup()
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
+      const { googleSignIn, loading}=useGoogleSignIn()
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
    });
+
   const onSubmit =async (data: RegisterFormValues) => {
     const {confirmPassword,...userData}=data
     await signup(userData)
 
   };
 
-  const handleGoogleSignup = () => {
-    // Implement your Google Auth logic here (e.g., signIn('google'))
-    console.log("Redirecting to Google...");
-  };
+ const handleGoogleSignup = async () => {
+ await googleSignIn()
+ };
 
   // Reusable input classes for cleaner code
   const inputStyles = "w-full p-3 rounded-lg border bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all";
@@ -47,7 +50,7 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name */}
         <div>
-          <label className='text-white'>Name</label>
+          <label className=''>Name</label>
           <input {...register("name")} placeholder="Full Name" className={inputStyles} />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
         </div>
@@ -93,17 +96,15 @@ const RegisterForm = () => {
           <div className="relative flex justify-center text-sm"><span className="bg-white dark:bg-gray-900 px-2 text-gray-500">Or continue with</span></div>
         </div>
 
-        <button type="button" className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
-          Google Signup
+        <button onClick={handleGoogleSignup} type="submit" className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
+        {
+ loading ? "Creating Account..." : "Register"
+         }
         </button>
       </form>
   </div>
 </div>
-
-
-
-   
-   
+  
   );
 };
 
