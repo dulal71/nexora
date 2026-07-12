@@ -1,0 +1,18 @@
+'use server'
+
+import { headers } from "next/headers";
+import { auth } from "../auth";
+
+export const getSession = async () => {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    return session?.user ?? null;
+
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

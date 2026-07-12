@@ -42,6 +42,9 @@ const MobileMenu = ({isMobileMenuOpen, setIsMobileMenuOpen,navLinks}:MobileMenuP
                 </Link>
               </li>
             ))}
+             <li className="">
+              <Link href={'/wishlist'}>Wishlist</Link>
+            </li>
             <li className="py-2">
               <ThemeSwitch />
             </li>
