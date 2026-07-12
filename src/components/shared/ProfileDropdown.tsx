@@ -5,6 +5,7 @@ import {Button, Dropdown} from "@heroui/react";
 import Link from "next/link";
 import { BiUser, BiCart, BiDish, BiLogOut } from "react-icons/bi";
 import { MdOutlineDashboard } from "react-icons/md";
+import Logout from "./Logout";
 
 const ProfileDropdown =() => {
        const {data: session }= authClient.useSession() 
@@ -33,12 +34,15 @@ const ProfileDropdown =() => {
 
       {user?.role === "admin" && (
         <Dropdown.Item id="admin-dashboard">
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/admin" className="flex items-center gap-2">
             <MdOutlineDashboard size={16} />
             Admin Dashboard
           </Link>
         </Dropdown.Item>
       )}
+       <Dropdown.Item>
+        <Logout></Logout>
+      </Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown.Popover>
 </Dropdown>

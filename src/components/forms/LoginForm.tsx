@@ -47,13 +47,13 @@ const LoginForm = () => {
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
         </div>
 
-       <button disabled={isLoading} className='text-white'>
+       <button disabled={isLoading} className='text-white dark:text-black bg-black dark:bg-white py-1.5 w-full rounded-full text-center'>
       Login
      </button>
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-300 dark:border-gray-700"></div></div>
-          <div className="relative flex justify-center text-sm"><span className="bg-white dark:bg-gray-900 px-2 text-gray-500">Or continue with</span></div>
+          <div className="relative flex justify-center text-sm"><span className="bg-white dark:bg-gray-900 px-2 text-white py-0.5">Or continue with</span></div>
         </div>
 
         <button onClick={handleGoogleSignup} type="submit" className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
