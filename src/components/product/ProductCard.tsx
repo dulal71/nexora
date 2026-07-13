@@ -9,7 +9,7 @@ interface ProductProps {
 
 const ProductCard = ({ product }: ProductProps) => {
   return (
-    <Link href={`/product/${product._id}`} className="group block">
+    <Link href={`/shop/${product._id}`} className="group block">
       <div className=" p-4 rounded-2xl  transition-all duration-300 ">
         
      
