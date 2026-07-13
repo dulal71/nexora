@@ -17,6 +17,7 @@ interface ProductFormData {
   shortDescription: string;
   fullDescription: string;
   status: string;
+  sizes: string[];
 }
 
 const initialFormData: ProductFormData = {
@@ -30,6 +31,7 @@ const initialFormData: ProductFormData = {
   shortDescription: "",
   fullDescription: "",
   status: "active",
+  sizes: []
 };
 
 const inputStyle =
@@ -43,6 +45,7 @@ const ProductForm = () => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+   
    const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -50,6 +53,16 @@ const ProductForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const AVAILABLE_SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
+
+const handleSizeToggle = (size: string) => {
+  setFormData((prev) => ({
+    ...prev,
+    sizes: prev.sizes.includes(size)
+      ? prev.sizes.filter((s) => s !== size)
+      : [...prev.sizes, size],
+  }));
+};
 
   const handleReset=()=>{
     setFormData(initialFormData)
@@ -248,6 +261,31 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
               </div>
             </div>
           </section>
+          {/* Section: Sizes */}
+           <section>
+  <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4 border-b border-gray-200 dark:border-gray-800 pb-2">
+    Available Sizes
+  </h2>
+  <div className="flex flex-wrap gap-2">
+    {AVAILABLE_SIZES.map((size) => {
+      const isSelected = formData.sizes.includes(size);
+      return (
+        <button
+          key={size}
+          type="button"
+          onClick={() => handleSizeToggle(size)}
+          className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+            isSelected
+              ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
+              : "border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white"
+          }`}
+        >
+          {size}
+        </button>
+      );
+    })}
+  </div>
+             </section>
 
           {/* Section: Images */}
           <section>

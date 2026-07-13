@@ -1,6 +1,7 @@
 import { Table, Button, Tooltip } from "@heroui/react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import DeleteProduct from "./DeleteProduct";
+import Link from "next/link";
 
 interface Product {
   _id: string;
@@ -38,6 +39,7 @@ export function ProductTable({ products }: ProductTableProps) {
                 <Table.Cell>
                   <div className="flex gap-2">
                     <Tooltip content="Edit product">
+                     <Link href={`/admin/products/${product._id}`}>
                       <Button
                         isIconOnly
                         size="sm"
@@ -46,6 +48,7 @@ export function ProductTable({ products }: ProductTableProps) {
                       >
                         <FiEdit2 className="w-4 h-4" />
                       </Button>
+                      </Link>
                     </Tooltip>
                     <Tooltip content="Delete product" color="danger">
                       <DeleteProduct productId={product._id}></DeleteProduct>
