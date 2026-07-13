@@ -1,8 +1,5 @@
 'use server'
 
-
-
-
 const baseUrl=process.env.SERVER_URL
 
 export const serverMutation=async(path:string , data : unknown, method:string = "POST")=>{

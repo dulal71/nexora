@@ -1,10 +1,32 @@
 "use client";
 
+import { deleteProduct } from "@/lib/action/deleteProduct";
 import {Button, Modal} from "@heroui/react";
 import { BiRocket } from "react-icons/bi";
 import { FiTrash2 } from "react-icons/fi";
+import { toast } from "sonner";
 
-const DeleteProduct = () => {
+interface DeleteProductProps {
+  productId: string;
+}
+
+const DeleteProduct = ({productId}:DeleteProductProps) => {
+ 
+   const handleDelete = async () => {
+    try {
+      const data = await deleteProduct(productId);
+
+      if (data.deletedCount > 0) {
+        toast.success("Delete Product Successfully");
+      } else {
+        toast.error("Product not found");
+      }
+
+    } catch(error) {
+      toast.error("Something went wrong");
+    }
+  };
+
     return (
         <Modal>
      <Button
@@ -28,7 +50,7 @@ const DeleteProduct = () => {
             <Modal.Body>
               </Modal.Body>
             <Modal.Footer>
-              <Button className="w-full" slot="close" variant="danger">
+              <Button onClick={handleDelete} className="w-full" slot="close" variant="danger">
                Delete
               </Button>
             </Modal.Footer>

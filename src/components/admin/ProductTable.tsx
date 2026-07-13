@@ -16,7 +16,7 @@ interface ProductTableProps {
   
 }
 
-export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) {
+export function ProductTable({ products }: ProductTableProps) {
   return (
     <Table variant="secondary">
       <Table.ScrollContainer>
@@ -48,7 +48,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
                       </Button>
                     </Tooltip>
                     <Tooltip content="Delete product" color="danger">
-                      <DeleteProduct></DeleteProduct>
+                      <DeleteProduct productId={product._id}></DeleteProduct>
                     </Tooltip>
                   </div>
                 </Table.Cell>
