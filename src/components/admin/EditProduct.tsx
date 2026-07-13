@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "./ProductDetails";
+import EditProductById from "@/lib/action/editProduct";
+import { toast } from "sonner";
+import { el } from "zod/locales";
+
 
 interface ProductDetailsProps {
   product: Product;
@@ -18,10 +22,10 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
     stock: product.stock !== undefined ? String(product.stock) : "",
     description: product.description ?? "",
     sizes: product.sizes?.join(", ") ?? "",
-    colors: product.colors?.join(", ") ?? "",
+   
   });
   const [isSaving, setIsSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -33,8 +37,7 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
-    setError(null);
-
+   
     try {
       const payload = {
         name: form.name,
@@ -46,25 +49,17 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
         sizes: form.sizes
           ? form.sizes.split(",").map((s) => s.trim()).filter(Boolean)
           : [],
-        colors: form.colors
-          ? form.colors.split(",").map((c) => c.trim()).filter(Boolean)
-          : [],
-      };
+};
 
-      const res = await fetch(`/api/products/${product._id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to update product");
-      }
-
-      router.push(`/admin/products/${product._id}`);
-      router.refresh();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+const res = await EditProductById(product._id, payload);
+   console.log(res);
+if(res.data.modifiedCount >0){
+    toast.success('Update Product Successfully')
+   }else{
+    toast.error('Something error try again')
+   }
+} catch (error) {
+     console.log(error);
     } finally {
       setIsSaving(false);
     }
@@ -90,13 +85,7 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
         </p>
       </div>
 
-      {error && (
-        <div className="mb-4 rounded-lg border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-900/30 px-4 py-2 text-sm text-red-700 dark:text-red-400">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-5">
+     <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label className={labelClasses}>Name</label>
@@ -166,18 +155,7 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
               placeholder="S, M, L, XL"
             />
           </div>
-
-          <div className="md:col-span-2">
-            <label className={labelClasses}>Colors (comma separated)</label>
-            <input
-              name="colors"
-              value={form.colors}
-              onChange={handleChange}
-              className={inputClasses}
-              placeholder="Black, White, Navy"
-            />
-          </div>
-        </div>
+</div>
 
         <div>
           <label className={labelClasses}>Description</label>

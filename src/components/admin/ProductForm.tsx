@@ -61,7 +61,9 @@ const handleSizeToggle = (size: string) => {
     sizes: prev.sizes.includes(size)
       ? prev.sizes.filter((s) => s !== size)
       : [...prev.sizes, size],
+        
   }));
+
 };
 
   const handleReset=()=>{
@@ -218,7 +220,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     onChange={handleChange}
                     placeholder="0.00"
                     min="0"
-                    step="0.01"
+                     step='1'
                     required
                     className={`${inputStyle} pl-7`}
                   />

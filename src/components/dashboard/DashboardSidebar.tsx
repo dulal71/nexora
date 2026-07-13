@@ -14,10 +14,12 @@ import { adminLinks } from "../admin/adminLinks";
 import Logout from "../shared/Logout";
 import { CgMoveLeft, CgMoveRight } from "react-icons/cg";
 import MobileSidebar from "./MobileSidebar";
+import { usePathname } from "next/navigation";
 
 const DashboardSidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
    const [mobileOpen, setMobileOpen] = useState(false);
+   const pathname = usePathname()
 
 
   return (
@@ -47,25 +49,45 @@ const DashboardSidebar = () => {
 
         {/* Navigation */}
         <nav className="flex flex-1 flex-col gap-1 px-3">
-          {adminLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`
-                flex items-center rounded-xl px-3 py-2.5
-                hover:bg-default transition-all
-                ${collapsed ? "justify-center" : "gap-3"}
-              `}
-            >
-              <item.icon className="size-5 shrink-0 text-black dark:text-white" />
+       {adminLinks.map((item) => {
+  const isActive = pathname === item.href;
 
-              {!collapsed && (
-                <span className="whitespace-nowrap text-black dark:text-white font-semibold">
-                  {item.name}
-                </span>
-              )}
-            </Link>
-          ))}
+  return (
+    <Link
+      key={item.name}
+      href={item.href}
+      className={`
+        flex items-center rounded-xl px-3 py-2.5 transition-all
+        ${collapsed ? "justify-center" : "gap-3"}
+        ${
+          isActive
+            ? "bg-[#d8d8de] dark:bg-white/10 translate-x-3"
+            : "hover:bg-[#f7f7f9] dark:hover:bg-white/10"
+        }
+      `}
+    >
+      <item.icon
+        className={`size-5 shrink-0 ${
+          isActive
+            ? "text-black dark:text-white"
+            : "text-black/70 dark:text-white/70"
+        }`}
+      />
+
+      {!collapsed && (
+        <span
+          className={`whitespace-nowrap font-semibold ${
+            isActive
+              ? "text-black dark:text-white"
+              : "text-black/70 dark:text-white/70"
+          }`}
+        >
+          {item.name}
+        </span>
+      )}
+    </Link>
+  );
+})}
 
           <div className="my-2 border-t border-default" />
 
