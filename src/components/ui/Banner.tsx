@@ -28,7 +28,7 @@ const bannerData = [
     description: "Stay warm with modern winter style.",
     buttonText: "Explore",
     image: "/image/banner-image-4.avif",
-    link: "/collections/winter",
+    link: "/shop",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const bannerData = [
     description: "Fresh summer collection available now.",
     buttonText: "View More",
     image: "/image/banner-image-3.avif",
-    link: "/collections/summer",
+    link: "/shop",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function Banner() {
                   {item.description}
                 </motion.p>
 
-                {/* বাটন উইথ লিঙ্ক */}
+              
                 <Link href={item.link} passHref>
                   <motion.button
                     initial={{ opacity: 0, scale: 0.8 }}
