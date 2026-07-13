@@ -7,7 +7,7 @@ const ShopPage = async () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header/Title */}
-      <h1 className="text-3xl font-bold mb-6 text-center">Our Collection</h1>
+      <h1 className="text-3xl font-semibold mb-6 text-center">Our Collection</h1>
 
       {/* Product List Section */}
       <div>

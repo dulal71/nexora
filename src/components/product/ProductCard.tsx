@@ -10,7 +10,7 @@ interface ProductProps {
 const ProductCard = ({ product }: ProductProps) => {
   return (
     <Link href={`/product/${product._id}`} className="group block">
-      <div className=" p-4 rounded-2xl  transition-all duration-300 border border-gray-100">
+      <div className=" p-4 rounded-2xl  transition-all duration-300 ">
         
      
         <div className="relative w-full h-72 overflow-hidden rounded-xl mb-4 bg-gray-200">
@@ -25,10 +25,10 @@ const ProductCard = ({ product }: ProductProps) => {
 
        
         <div className="text-center space-y-1">
-          <h3 className="text-lg font-medium text-gray-800">{product.name}</h3>
+          <h3 className="text-lg font-medium text-gray-800 dark:text-white">{product.name}</h3>
           
           <div className="flex justify-center items-center gap-2">
-            <span className="text-md font-bold text-black">${product.discountPrice}</span>
+            <span className="text-md font-bold text-black dark:text-gray-300">${product.discountPrice}</span>
             {product.discountPrice && (
               <span className="text-sm text-gray-400 line-through">${product.price}</span>
             )}
