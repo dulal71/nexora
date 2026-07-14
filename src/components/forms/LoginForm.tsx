@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import useUserLogin from '@/lib/authService/useLogin';
 import useGoogleSignIn from '@/lib/authService/useGoogleSignIn';
+import Link from 'next/link';
 
 const registerSchema = z.object({
  email: z.string().email("Invalid email address"),
@@ -29,7 +30,7 @@ const LoginForm = () => {
        const inputStyles = "w-full p-3 rounded-lg border bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all";
     return (
        <div className="w-full flex justify-center items-center min-h-screen p-4">
-  <div className="w-full max-w-md p-8 rounded-2xl shadow-xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 transition-colors duration-300">
+  <div className="w-full max-w-md p-8 rounded-2xl shadow-xl bg-white dark:bg-black border border-gray-100 dark:border-gray-800 transition-colors duration-300">
   
     <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">Create an Account</h2>
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -61,6 +62,12 @@ const LoginForm = () => {
        loading ? "Signing in..." : "Google Signup"
            }
         </button>
+        <div className="text-center mt-4 text-sm text-gray-600 dark:text-white">
+  Don&apos;t have an account?{" "}
+  <Link href="/register" className="text-red-600 hover:underline font-medium">
+    Sign up
+  </Link>
+</div>
       </form>
   </div>
 </div>
