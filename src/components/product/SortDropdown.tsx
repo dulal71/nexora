@@ -1,13 +1,38 @@
 import { Label, ListBox, Select } from "@heroui/react";
 
-export type SortOption = "featured" | "price-low" | "price-high" | "newest";
+export type SortOption =
+  | "featured"
+  | "price-low"
+  | "price-high"
+  | "newest"
+  | "popular";
 
-const SORT_LABELS: Record<SortOption, string> = {
-  featured: "Featured",
-  "price-low": "Price: Low to High",
-  "price-high": "Price: High to Low",
-  newest: "Newest Arrivals",
-};
+
+const SORT_OPTIONS = [
+  {
+    value: "featured",
+    label: "Featured",
+  },
+  {
+    value: "price-low",
+    label: "Price: Low to High",
+  },
+  {
+    value: "price-high",
+    label: "Price: High to Low",
+  },
+  {
+    value: "newest",
+    label: "Newest Arrivals",
+  },
+  {
+    value: "popular",
+    label: "Most Popular",
+  },
+] satisfies {
+  value: SortOption;
+  label: string;
+}[];
 
 type SortDropdownProps = {
   sort: SortOption;
@@ -28,15 +53,16 @@ const SortDropdown = ({ sort, setSort }: SortDropdownProps) => {
         <Select.Indicator />
       </Select.Trigger>
       <Select.Popover>
-        <ListBox items={Object.entries(SORT_LABELS)}>
-          {([key, label]) => (
-            <ListBox.Item key={key} id={key}>
-              {label}
-              <ListBox.ItemIndicator />
-            </ListBox.Item>
-          )}
-        </ListBox>
-      </Select.Popover>
+         <ListBox items={SORT_OPTIONS}>
+        {
+           SORT_OPTIONS.map(item=>
+            <ListBox.Item key={item.value} id={item.value}>
+              {item.label}
+                <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                      )}
+                      </ListBox>
+        </Select.Popover>
     </Select>
   );
 };
