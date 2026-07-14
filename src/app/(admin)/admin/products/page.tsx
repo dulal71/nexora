@@ -1,8 +1,14 @@
 import { ProductTable } from '@/components/admin/ProductTable';
+import { PaginationWithEllipsis } from '@/components/shared/Pagination';
 import { getProducts } from '@/lib/api/getProducts';
+type ProductProps = {
+  searchParams: Promise<{ page?: string }>;
 
-const Products = async () => {
-  const { data: products } = await getProducts();
+};
+const Products = async ({searchParams}:ProductProps) => {
+ const {page}=await searchParams
+  const currentPage = Number(page)|| 1
+  const { data: products,total } = await getProducts(currentPage);
 
   return (
     <div className= " max-w-7xl mx-auto  p-6">
@@ -16,6 +22,7 @@ const Products = async () => {
       <div>
         <ProductTable products={products} />
       </div>
+      <PaginationWithEllipsis total={total}></PaginationWithEllipsis>
     </div>
   );
 };

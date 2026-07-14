@@ -12,6 +12,7 @@ export function PaginationWithEllipsis({total}:PaginationProps) {
   const router = useRouter()
   const perPage = 12;
   const totalPages = Math.ceil(total / perPage);
+  
 
   useEffect(()=>{
   const params=new URLSearchParams()
