@@ -1,88 +1,70 @@
-
-
 'use client';
-import { useState, useRef, useEffect } from "react";
-import FilterDropdown from "./FilterDropdown";
-import { Description, Label, ListBox, SearchField,Select } from "@heroui/react";
-import SortDropdown from "./SortDropdown";
-
-
-type SortOption = "featured" | "price-low" | "price-high" | "newest";
-
-const ALL_CATEGORIES = ["Men", "Women"] as const;
-type Category = typeof ALL_CATEGORIES[number];
-
-const SORT_LABELS: Record<SortOption, string> = {
-  featured: "Featured",
-  "price-low": "Price: Low to High",
-  "price-high": "Price: High to Low",
-  newest: "Newest Arrivals",
-};
+import { useState } from "react";
+import FilterDropdown, { Category } from "./FilterDropdown";
+import { Label, SearchField } from "@heroui/react";
+import SortDropdown, { SortOption } from "./SortDropdown";
+import { useRouter } from "next/navigation";
 
 interface ProductToolbarProps {
   className?: string;
 }
 
 const ProductToolbar = ({ className = "" }: ProductToolbarProps) => {
+  const [search, setSearch] = useState<string>("");
+  const [category, setCategory] = useState<string>('');
+ const [sort, setSort] = useState<SortOption>("featured");
+const router = useRouter();
+const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (search) params.set('search', search);
+    if (sort) params.set('sort', sort);
+    if(category)params.set('category',category)
 
-  const [search, setSearch] = useState("");
-  const [isFilterOpen, setFilterOpen] = useState(false);
-  const [isSortOpen, setSortOpen] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
-  const [newArrivalOnly, setNewArrivalOnly] = useState(false);
-  const [sort, setSort] = useState<SortOption>("featured");
-
-  const filterRef = useRef<HTMLDivElement>(null);
-  const sortRef = useRef<HTMLDivElement>(null);
-
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) setFilterOpen(false);
-      if (sortRef.current && !sortRef.current.contains(event.target as Node)) setSortOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const toggleCategory = (cat: Category) => {
-    setCategories(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
+    router.push(`?${params.toString()}`);
   };
 
-  const resetFilters = () => {
-    setCategories([]);
-    setPriceRange({ min: 0, max: 1000 });
-    setNewArrivalOnly(false);
+  const handleClear = () => {
+    setSearch('');
+    setCategory('')
+    setSort('featured');
+router.push('/shop')
   };
-
-  const activeFilterCount = categories.length + (newArrivalOnly ? 1 : 0);
 
   return (
-    <div className="container mx-auto flex flex-wrap  items-center md:gap-5 lg:gap-10 p-2 md:p-5 my-4">
-      {/* Search Input */}
-      <div className="w-full md:flex-1 flex flex-col gap-4">
-      <SearchField name="search">
-        <Label>Search products</Label>
-        <SearchField.Group>
-          <SearchField.SearchIcon />
-          <SearchField.Input className="w-[280px]" placeholder="Search products..." />
-          <SearchField.ClearButton />
-        </SearchField.Group>
-       
-      </SearchField>
-      
-    </div>
-      {/* Filter Button */}
-      <FilterDropdown></FilterDropdown>
- {/* Sort Button */}
+   <div className="container mx-auto flex flex-wrap items-end gap-5 p-2 md:p-5 my-4">
+  {/* Search Field */}
+  <div className="w-full md:w-[400px]">
+    <SearchField value={search} onChange={setSearch} name="search">
+      <Label>Search products</Label>
+      <SearchField.Group>
+        <SearchField.SearchIcon />
+        <SearchField.Input className="py-4 text-[18px]" placeholder="Search products..." />
+        <SearchField.ClearButton />
+      </SearchField.Group>
+    </SearchField>
+  </div>
 
-        <SortDropdown></SortDropdown>
-   
-    </div>
+  {/* Dropdowns */}
+  <FilterDropdown category={category} setCategory={setCategory} />
+  <SortDropdown sort={sort} setSort={setSort} />
+
+ 
+  <div className="flex items-center gap-3">
+    <button
+      onClick={handleSearch}
+      className="bg-red-800 hover:bg-red-700 text-white font-bold px-8  rounded-xl transition-all shadow-lg py-2 cursor-pointer"
+    >
+      Search
+    </button>
+    <button
+      onClick={handleClear}
+      className="bg-zinc-600 hover:bg-zinc-700 text-white font-bold px-8 py-2 rounded-xl transition-all shadow-lg  cursor-pointer"
+    >
+      Clear
+    </button>
+  </div>
+</div>
   );
 };
 
 export default ProductToolbar;
-
-

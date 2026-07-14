@@ -7,9 +7,10 @@ type ShopPageProps = {
 };
 
 const ShopPage = async ({searchParams}:ShopPageProps) => {
-  const {page}=await searchParams
+  const query=await searchParams
+  const {page,search="",sort="",category=''}=query
   const currentPage = Number(page)|| 1
-  const { data: products,total } = await getProducts(currentPage);
+  const { data: products,total } = await getProducts(currentPage,search,sort,category);
  
   return (
     <div className="container mx-auto px-4 py-8">
