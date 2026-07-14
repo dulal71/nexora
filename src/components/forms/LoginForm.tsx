@@ -7,6 +7,7 @@ import * as z from 'zod';
 import useUserLogin from '@/lib/authService/useLogin';
 import useGoogleSignIn from '@/lib/authService/useGoogleSignIn';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 const registerSchema = z.object({
  email: z.string().email("Invalid email address"),
@@ -15,13 +16,15 @@ password: z.string().min(6, "Password must be at least 6 characters"),
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 const LoginForm = () => {
+  const searchParams=useSearchParams()
+const redirectTo=searchParams.get('redirect') || "/"
      const { Login, isLoading}=useUserLogin()
      const { googleSignIn, loading}=useGoogleSignIn()
       const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
         resolver: zodResolver(registerSchema),
        });
       const onSubmit =async (data: RegisterFormValues) => {
-         await Login(data)
+         await Login(data,redirectTo)
      };
     
   const handleGoogleSignup = async () => {

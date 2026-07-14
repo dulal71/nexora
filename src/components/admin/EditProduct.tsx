@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Product } from "./ProductDetails";
 import EditProductById from "@/lib/action/editProduct";
 import { toast } from "sonner";
-import { el } from "zod/locales";
+
 
 
 interface ProductDetailsProps {
@@ -18,7 +18,7 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
     name: product.name,
     category: product.category,
     brand: product.brand,
-    price: String(product.price),
+    price: Number(product.price),
     stock: product.stock !== undefined ? String(product.stock) : "",
     description: product.description ?? "",
     sizes: product.sizes?.join(", ") ?? "",

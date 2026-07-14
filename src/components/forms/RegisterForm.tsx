@@ -6,6 +6,7 @@ import * as z from 'zod';
 import useUserSignup from '@/lib/authService/userSignup';
 import { toast } from 'sonner';
 import useGoogleSignIn from '@/lib/authService/useGoogleSignIn';
+import { useSearchParams } from 'next/navigation';
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -23,6 +24,8 @@ const registerSchema = z.object({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
+  const searchParams=useSearchParams()
+  const redirectTo=searchParams.get('redirect') || "/"
     const { signup, isLoading}=useUserSignup()
       const { googleSignIn, loading}=useGoogleSignIn()
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
@@ -31,7 +34,7 @@ const RegisterForm = () => {
 
   const onSubmit =async (data: RegisterFormValues) => {
     const {confirmPassword,...userData}=data
-    await signup(userData)
+    await signup(userData,redirectTo)
 
   };
 

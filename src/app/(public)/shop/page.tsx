@@ -1,8 +1,13 @@
 import ProductContainer from "@/components/product/ProductContainer";
 import { getProducts } from "@/lib/api/getProducts";
-
+type SearchParams = {
+  page?: string;
+  search?: string;
+  sort?: string;
+  category?: string;
+}
 type ShopPageProps = {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<SearchParams>;
 
 };
 

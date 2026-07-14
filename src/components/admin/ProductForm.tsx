@@ -10,7 +10,7 @@ interface ProductFormData {
   name: string;
   category: string;
   brand: string;
-  price: string;
+  price: number;
   discountPrice: string;
   stock: string;
   images: FileList | null;
@@ -24,7 +24,7 @@ const initialFormData: ProductFormData = {
   name: "",
   category: "",
   brand: "",
-  price: "",
+  price:0 ,
   discountPrice: "",
   stock: "",
   images: null,
@@ -105,7 +105,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     
     if(res.insertedId){
       toast.success("Product added successfully");
-      handleReset(); // <--- এখানে যোগ করুন, যাতে সেভ হওয়ার পর ফর্ম খালি হয়ে যায়
+      handleReset(); 
     }
   } catch (error) {
     toast.error("Failed to add product");
@@ -165,8 +165,9 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   <option value="">Select category</option>
                   <option value="fashion">Fashion</option>
                   <option value="men">Men</option>
-                  <option value="furniture">Furniture</option>
-                  <option value="home-decor">Home Decor</option>
+                  <option value="women">Women</option>
+                  <option value="kids">Kids</option>
+                  <option value="accessories">Accessories</option>
                   <option value="shoes">Shoes</option>
                 </select>
               </div>

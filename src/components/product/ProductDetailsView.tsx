@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { FiHeart, FiTruck, FiRotateCcw, FiMail, FiMinus, FiPlus, FiEye } from "react-icons/fi";
 import { Product } from "@/type/product";
+import Link from "next/link";
 
 
 
@@ -207,15 +208,18 @@ export default function ProductDetailsView({
             Add To Cart
           </button>
         </div>
-
+        
+        <Link href={'/checkout'} 
+         className=" flex justify-center items-center mt-3 h-12 rounded-full bg-[#f28b7f] text-sm font-medium text-white  transition hover:bg-[#ef7a6c] disabled:cursor-not-allowed disabled:bg-neutral-300"
+        >
         <button
           type="button"
           disabled={isOutOfStock}
-          className="mt-3 h-12 rounded-full bg-[#f28b7f] text-sm font-medium text-white transition hover:bg-[#ef7a6c] disabled:cursor-not-allowed disabled:bg-neutral-300"
+          
         >
           Buy It Now
         </button>
-
+         </Link>
         {/* Secondary actions */}
         <div className="mt-4 flex flex-wrap gap-6 text-sm text-neutral-700">
           <button

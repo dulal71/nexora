@@ -19,7 +19,7 @@ export default function useUserSignup() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const signup = async (data: SignupData) => {
+  const signup = async (data: SignupData,redirectTo:string) => {
     setIsLoading(true);
     try {
    
@@ -37,7 +37,7 @@ export default function useUserSignup() {
      
       } else {
         toast.success("Registration successful!");
-       router.push('/login')
+       router.push(redirectTo)
       }
     } catch (err) {
       console.error(err);

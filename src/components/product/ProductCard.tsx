@@ -28,9 +28,9 @@ const ProductCard = ({ product }: ProductProps) => {
           <h3 className="text-lg font-medium text-gray-800 dark:text-white">{product.name}</h3>
           
           <div className="flex justify-center items-center gap-2">
-            <span className="text-md font-bold text-black dark:text-gray-300">${product.discountPrice}</span>
+            <span className="text-md font-bold text-black dark:text-gray-300">${product.price}</span>
             {product.discountPrice && (
-              <span className="text-sm text-gray-400 line-through">${product.price}</span>
+              <span className="text-sm text-gray-400 line-through">${product.discountPrice}</span>
             )}
           </div>
         </div>

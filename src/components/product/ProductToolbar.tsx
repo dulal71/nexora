@@ -18,7 +18,7 @@ const handleSearch = () => {
     const params = new URLSearchParams();
     if (search) params.set('search', search);
     if (sort) params.set('sort', sort);
-    if(category)params.set('category',category)
+    if(category !== 'All')params.set('category',category)
 
     router.push(`?${params.toString()}`);
   };

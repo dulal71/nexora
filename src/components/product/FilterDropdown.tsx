@@ -5,7 +5,7 @@ import { Label, ListBox, Select } from "@heroui/react";
 
 
 
-export type CategoryOption = "All" | "Men" | "Women"|'Kids'|'Accessories' ;
+export type CategoryOption = "All" | "Men" | "Women"|'Kids'|'Accessories'|'Shoes' ;
 
 const CATEGORY_OPTIONS = [
   {
@@ -23,6 +23,10 @@ const CATEGORY_OPTIONS = [
   {
     value: "Kids",
     label: "Kids",
+  },
+  {
+    value:'Shoes',
+    label:'Shoes'
   },
   {
     value: "Accessories",

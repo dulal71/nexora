@@ -16,7 +16,7 @@ export default function useUserLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const Login = async (userData: LoginData) => {
+  const Login = async (userData: LoginData,redirectTo:string) => {
     setIsLoading(true);
     try {
    
@@ -30,7 +30,7 @@ export default function useUserLogin() {
      
       } else {
         toast.success("Registration successful!");
-       router.push('/')
+       router.push(redirectTo)
       }
     } catch (err) {
       console.error(err);
