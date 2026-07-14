@@ -1,6 +1,6 @@
 export const NewsletterSection: React.FC = () => {
   return (
-    <section className="py-16 bg-[#F5F5F5] px-4">
+    <section className="py-16 bg-[#F5F5F5] dark:bg-black px-4">
       <div className="max-w-2xl mx-auto text-center space-y-4">
         {/* Heading */}
         <h2 className="text-3xl font-bold text-[var(--foreground)]">

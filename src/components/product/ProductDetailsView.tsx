@@ -3,26 +3,11 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { FiHeart, FiTruck, FiRotateCcw, FiMail, FiMinus, FiPlus, FiEye } from "react-icons/fi";
+import { Product } from "@/type/product";
 
-// import type { Product } from "../types/product";
 
-export interface Product {
-  _id: string;
-  name: string;
-  category: string;
-  brand: string;
-  price: string;
-  discountPrice?: string;
-  fullDescription?: string;
-  shortDescription?: string;
-  images: string[];
-  sizes: string[];
-  status: "active" | "inactive" | "draft";
-  stock: string;
-  createdAt: string;
-  sku?: string;
-  barcode?: string;
-}
+
+
 interface ProductDetailsProps {
   product: Product;
   /** Live "people viewing" style social proof number. Pass from an actual
@@ -120,21 +105,21 @@ export default function ProductDetailsView({
       {/* Details */}
       <div className="flex flex-col">
         <p className="text-sm text-neutral-500">{product.brand}</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-neutral-900">
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-neutral-900 dark:!text-slate-50">
           {product.name}
         </h1>
 
-        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-500">
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-500 dark:text-neutral-200">
           {product.barcode && <span>Barcode: {product.barcode}</span>}
           <span>SKU: {product.sku ?? product._id.slice(-8).toUpperCase()}</span>
         </div>
 
         <div className="mt-4 flex items-baseline gap-3">
-          <span className="text-2xl font-semibold text-neutral-900">
+          <span className="text-2xl font-semibold text-neutral-900 dark:text-neutral-200">
             {formattedPrice}
           </span>
           {formattedOriginalPrice && (
-            <span className="text-lg text-neutral-400 line-through">
+            <span className="text-lg text-neutral-400 dark:text-white line-through">
               {formattedOriginalPrice}
             </span>
           )}
@@ -144,7 +129,7 @@ export default function ProductDetailsView({
         {product.sizes.length > 0 && (
           <div className="mt-6">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-700">
+              <span className="text-sm text-neutral-700 dark:text-white">
                 Size:{" "}
                 <span className="font-medium text-neutral-900">
                   {selectedSize}

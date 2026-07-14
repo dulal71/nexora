@@ -2,7 +2,7 @@ import EditProduct from "@/components/admin/EditProduct";
 import ProductDetails from "@/components/admin/ProductDetails";
 import getProductById from "@/lib/api/getProductById";
 
-interface ProductDetailsProps {
+export interface ProductDetailsProps {
   params: Promise<{ productId: string }>;
 }
 
