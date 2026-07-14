@@ -15,3 +15,12 @@ export interface Product {
   sku?: string;
   barcode?: string;
 }
+
+
+// export interface ProductQuery {
+//   search: string;
+//   categories: Category[];
+//   priceRange: PriceRange;
+//   newArrivalOnly: boolean;
+//   sort: SortOption;
+// }

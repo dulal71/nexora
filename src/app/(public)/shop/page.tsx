@@ -1,9 +1,16 @@
 import ProductContainer from "@/components/product/ProductContainer";
 import { getProducts } from "@/lib/api/getProducts";
 
-const ShopPage = async () => {
-  const { data: products } = await getProducts();
+type ShopPageProps = {
+  searchParams: Promise<{ page?: string }>;
 
+};
+
+const ShopPage = async ({searchParams}:ShopPageProps) => {
+  const {page}=await searchParams
+  const currentPage = Number(page)|| 1
+  const { data: products,total } = await getProducts(currentPage);
+ 
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header/Title */}
@@ -13,7 +20,7 @@ const ShopPage = async () => {
       <div>
         {products && products.length > 0 ? (
       
-          <ProductContainer products={products} />
+          <ProductContainer products={products} total={total} />
         ) : (
 
           <div className="flex justify-center items-center h-64">

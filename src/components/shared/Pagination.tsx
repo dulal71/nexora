@@ -1,11 +1,83 @@
-import React from 'react';
+"use client";
 
-const Pagination = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+import {Pagination} from "@heroui/react";
+import { useRouter } from "next/navigation";
+import {useEffect, useState} from "react";
 
-export default Pagination;
+interface PaginationProps {
+  total: number;
+}
+export function PaginationWithEllipsis({total}:PaginationProps) {
+  const [page, setPage] = useState(1);
+  const router = useRouter()
+  const perPage = 12;
+  const totalPages = Math.ceil(total / perPage);
+
+  useEffect(()=>{
+  const params=new URLSearchParams()
+  if(page){
+    params.set('page',page)
+  }
+  const path= `?${params.toString()}`
+ router.push(path)
+  },[page])
+
+  const getPageNumbers = () => {
+    const pages: (number | "ellipsis")[] = [];
+
+    pages.push(1);
+
+    if (page > 3) {
+      pages.push("ellipsis");
+    }
+
+    const start = Math.max(2, page - 1);
+    const end = Math.min(totalPages - 1, page + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (page < totalPages - 2) {
+      pages.push("ellipsis");
+    }
+
+    pages.push(totalPages);
+
+    return pages;
+  };
+
+  return (
+    <div className="w-full max-w-2xs overflow-x-auto sm:max-w-full">
+      <Pagination className="justify-center">
+        <Pagination.Content>
+          <Pagination.Item>
+            <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
+              <Pagination.PreviousIcon />
+              <span>Previous</span>
+            </Pagination.Previous>
+          </Pagination.Item>
+          {getPageNumbers().map((p, i) =>
+            p === "ellipsis" ? (
+              <Pagination.Item key={`ellipsis-${i}`}>
+                <Pagination.Ellipsis />
+              </Pagination.Item>
+            ) : (
+              <Pagination.Item key={p}>
+                <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                  {p}
+                </Pagination.Link>
+              </Pagination.Item>
+            ),
+          )}
+          <Pagination.Item>
+            <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
+              <span>Next</span>
+              <Pagination.NextIcon />
+            </Pagination.Next>
+          </Pagination.Item>
+        </Pagination.Content>
+      </Pagination>
+    </div>
+  );
+}
