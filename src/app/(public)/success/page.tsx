@@ -29,21 +29,24 @@ export default async function Success({
 
   if (status === "complete") {
     return (
-      <div className="flex justify-center items-center mt-10">
-        <div className="space-y-2">
-          <h1>Thank You!</h1>
+      <div>
+  <p className="text-neutral-600">
+    Thank you for your purchase! A confirmation email has been sent to{" "}
+    <span className="font-medium text-neutral-900">{customerEmail}</span>.
+  </p>
 
-        <p>
-          We appreciate your business! A confirmation email will be sent to{" "}
-          <strong>{customerEmail}</st>.
-        </p>
-
-        <p>
-          If you have any questions, please email{" "}
-          <a href="mailto:ahmeddulal4211@gmail.com">orders@example.com</a>.
-        </p>
-        </div>
-      </div>
+  <p className="mt-3 text-neutral-600">
+    If you have any questions or need assistance, please contact our support
+    team at{" "}
+    <a
+      href="mailto:ahmeddulal4211@gmail.com"
+      className="font-medium text-blue-600 hover:underline"
+    >
+      orders@example.com
+    </a>
+    .
+  </p>
+</div>
     );
   }
 
