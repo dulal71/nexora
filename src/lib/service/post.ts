@@ -7,7 +7,7 @@ const baseUrl=process.env.SERVER_URL
 
 export const authHeader = async (): Promise<Record<string, string>> => {
   const token = await getUserToken();
-  console.log(token);
+ 
   const header: Record<string, string> = token
     ? { authorization: `Bearer ${token}` }
     : {};
