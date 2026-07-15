@@ -32,8 +32,8 @@ const DeleteProduct = ({productId}:DeleteProductProps) => {
      <Button
     isIconOnly
     size="sm"
-    variant="light"
-    color="danger"
+    variant="ghost"
+  className={'bg-red-500'}
      >
     <FiTrash2 className="w-4 h-4" />
     </Button>
