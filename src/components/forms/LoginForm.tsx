@@ -62,7 +62,7 @@ const redirectTo=searchParams.get('redirect') || "/"
 
         <button onClick={handleGoogleSignup} type="submit" className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
           {
-       loading ? "Signing in..." : "Google Signup"
+       loading ? "Signing in..." : "Google Signin"
            }
         </button>
         <div className="text-center mt-4 text-sm text-gray-600 dark:text-white">

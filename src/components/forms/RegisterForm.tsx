@@ -40,7 +40,7 @@ const RegisterForm = () => {
 
  const handleGoogleSignup = async () => {
  await googleSignIn()
- };
+};
 
   // Reusable input classes for cleaner code
   const inputStyles = "w-full p-3 rounded-lg border bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all";
@@ -86,7 +86,9 @@ const RegisterForm = () => {
           {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
         </div>
 
-       <button disabled={isLoading}>
+       <button disabled={isLoading}
+       className='text-white dark:text-black bg-black dark:bg-white py-1.5 w-full rounded-full text-center'
+       >
 
            {
          isLoading ? "Creating Account..." : "Register"
@@ -101,7 +103,7 @@ const RegisterForm = () => {
 
         <button onClick={handleGoogleSignup} type="submit" className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
         {
- loading ? "Creating Account..." : "Register"
+ loading ? "Creating Account..." : "Register With Google"
          }
         </button>
       </form>
