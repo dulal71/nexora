@@ -64,7 +64,7 @@ const ProfileDropdown =() => {
         </Dropdown.Item>
       )}
        <Dropdown.Item>
-        <Logout></Logout>
+      
       </Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown.Popover>
