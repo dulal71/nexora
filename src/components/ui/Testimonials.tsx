@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
@@ -69,7 +70,7 @@ const REVIEWS_DATA = [
 ];
 
 export default function Testimonials() {
-  const swiperRef = useRef(null);
+ const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <div className="w-full  min-h-[600px] py-16 px-4 md:px-12 ">
