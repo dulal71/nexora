@@ -10,7 +10,7 @@ interface NavLink {
   path: string;
 }
 interface MobileMenuProps {
-    setIsMobileMenuOpen: Dispatch<SetStateAction<boolean>>
+  setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isMobileMenuOpen: boolean;
   navLinks: NavLink[];
 }
