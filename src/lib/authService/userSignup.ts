@@ -10,8 +10,7 @@ import { authClient } from "../auth-client";
 interface SignupData {
   name: string;
   email: string;
-  phone: string;
-  password: string;
+ password: string;
 
 }
 
@@ -27,7 +26,7 @@ export default function useUserSignup() {
         email: data.email,
         password: data.password,
         name: data.name,
-       phone:data.phone,
+      
       
       });
 
