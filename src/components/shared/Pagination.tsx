@@ -17,7 +17,7 @@ export function PaginationWithEllipsis({total}:PaginationProps) {
   useEffect(()=>{
   const params=new URLSearchParams()
   if(page){
-    params.set('page',page)
+    params.set('page',String(page))
   }
   const path= `?${params.toString()}`
  router.push(path)
