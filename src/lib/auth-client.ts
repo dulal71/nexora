@@ -1,15 +1,10 @@
-import { adminClient } from "better-auth/client/plugins";
-import { createAuthClient } from "better-auth/react";
-
+import { adminClient } from "better-auth/client/plugins"
+import { createAuthClient } from "better-auth/react"
 export const authClient = createAuthClient({
-  baseURL: process.env.BETTER_AUTH_URL as string,
-  plugins: [
-    adminClient()
-  ],
-});
 
-export const {
-  signIn,
-  signUp,
-  useSession,
-} = authClient;
+    baseURL: process.env.https://nexora-git-main-dulal71s-projects.vercel.app/
+    plugins:[
+        adminClient()
+    ]
+})
+export const { signIn, signUp, useSession } = createAuthClient()

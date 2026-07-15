@@ -29,19 +29,21 @@ export default async function Success({
 
   if (status === "complete") {
     return (
-      <section>
-        <h1>Thank You!</h1>
+      <div className="flex justify-center items-center mt-10">
+        <div className="space-y-2">
+          <h1>Thank You!</h1>
 
         <p>
           We appreciate your business! A confirmation email will be sent to{" "}
-          <strong>{customerEmail}</strong>.
+          <strong>{customerEmail}</st>.
         </p>
 
         <p>
           If you have any questions, please email{" "}
           <a href="mailto:ahmeddulal4211@gmail.com">orders@example.com</a>.
         </p>
-      </section>
+        </div>
+      </div>
     );
   }
 

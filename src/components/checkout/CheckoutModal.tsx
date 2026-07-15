@@ -5,7 +5,7 @@ import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { Product } from "../product/ProductDetailsView";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 

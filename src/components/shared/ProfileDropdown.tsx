@@ -3,10 +3,9 @@
 import { authClient } from "@/lib/auth-client";
 import {Button, Dropdown} from "@heroui/react";
 import Link from "next/link";
-import { BiUser, BiCart, BiDish, BiLogOut, BiLogIn, BiSignal1 } from "react-icons/bi";
+import { BiUser, BiCart,  BiLogIn,} from "react-icons/bi";
 import { MdOutlineDashboard } from "react-icons/md";
-import Logout from "./Logout";
-import { SiGnu } from "react-icons/si";
+
 import { FaRegistered } from "react-icons/fa6";
 
 const ProfileDropdown =() => {
