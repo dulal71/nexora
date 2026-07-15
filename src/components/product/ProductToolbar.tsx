@@ -23,7 +23,7 @@ const handleSearch = () => {
 
   const handleClear = () => {
     setSearch('');
-    setCategory('')
+    setCategory('All')
     setSort('featured');
 router.push('/shop')
   };
