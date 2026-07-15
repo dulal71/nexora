@@ -7,6 +7,7 @@ import ProductActions from "./ProductActions";
 export interface Product {
   _id: string;
   name: string;
+  brand:string;
   price: number;
   discountPrice?: number;
   stock:number;
@@ -119,12 +120,7 @@ const decrementQuantity = () => setQuantity((q) => Math.max(1, q - 1));
         {/* Info boxes */}
        <ProductInfoCard></ProductInfoCard>
 
-        {/* {typeof viewersCount === "number" && viewersCount > 0 && (
-          <p className="mt-4 flex items-center gap-2 text-sm text-neutral-500">
-            <FiEye className="h-4 w-4" />
-            {viewersCount} people looking at this product right now
-          </p>
-        )} */}
+      
 
         <p className="mt-4 text-xs text-neutral-400">
           Guaranteed safe checkout
