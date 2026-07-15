@@ -9,7 +9,7 @@ interface Product {
   category: string;
   brand: string;
   price: string;
-  [key: string]: any;
+  [key: string]:unknown;
 }
 
 interface ProductTableProps {
@@ -38,19 +38,19 @@ export function ProductTable({ products }: ProductTableProps) {
                 <Table.Cell>${product.price}</Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-2">
-                    <Tooltip content="Edit product">
+                    <Tooltip >
                      <Link href={`/admin/products/${product._id}`}>
                       <Button
                         isIconOnly
                         size="sm"
-                        variant="light"
+                        variant="ghost"
                        
                       >
                         <FiEdit2 className="w-4 h-4" />
                       </Button>
                       </Link>
                     </Tooltip>
-                    <Tooltip content="Delete product" color="danger">
+                    <Tooltip  >
                       <DeleteProduct productId={product._id}></DeleteProduct>
                     </Tooltip>
                   </div>
