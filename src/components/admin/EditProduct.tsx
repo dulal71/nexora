@@ -6,9 +6,7 @@ import { Product } from "./ProductDetails";
 import EditProductById from "@/lib/action/editProduct";
 import { toast } from "sonner";
 
-interface:product{
-  
-}
+
 
 interface ProductDetailsProps {
   product: Product;
