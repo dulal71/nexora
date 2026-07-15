@@ -1,9 +1,14 @@
 import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
 
+interface SuccessPageProps {
+  searchParams: Promise<{
+    session_id?: string;
+    
+  }>;
+}
 
-
-export default async function Success({ searchParams }) {
+export default async function Success({ searchParams }:SuccessPageProps) {
   const { session_id } = await searchParams
 
   if (!session_id)
