@@ -5,11 +5,9 @@ import { Label, SearchField } from "@heroui/react";
 import SortDropdown, { SortOption } from "./SortDropdown";
 import { useRouter } from "next/navigation";
 
-interface ProductToolbarProps {
-  className?: string;
-}
 
-const ProductToolbar = ({ className = "" }: ProductToolbarProps) => {
+
+const ProductToolbar = () => {
   const [search, setSearch] = useState<string>("");
   const [category, setCategory] = useState<string>('');
  const [sort, setSort] = useState<SortOption>("featured");
