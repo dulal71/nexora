@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import FilterDropdown, { Category } from "./FilterDropdown";
+import FilterDropdown from "./FilterDropdown";
 import { Label, SearchField } from "@heroui/react";
 import SortDropdown, { SortOption } from "./SortDropdown";
 import { useRouter } from "next/navigation";
