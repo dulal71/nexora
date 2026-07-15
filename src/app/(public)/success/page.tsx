@@ -39,7 +39,7 @@ export default async function Success({
 
         <p>
           If you have any questions, please email{" "}
-          <a href="mailto:orders@example.com">orders@example.com</a>.
+          <a href="mailto:ahmeddulal4211@gmail.com">orders@example.com</a>.
         </p>
       </section>
     );
