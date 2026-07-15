@@ -11,7 +11,7 @@ export interface Product {
   name: string;
  brand: string;
   price: number;          
-  discountPrice?: string; 
+  discountPrice?: number; 
  images: string[];        
 }
 interface ProductContainerProps {
