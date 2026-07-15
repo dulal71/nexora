@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import FilterDropdown from "./FilterDropdown";
+import FilterDropdown, { CategoryOption } from "./FilterDropdown";
 import { Label, SearchField } from "@heroui/react";
 import SortDropdown, { SortOption } from "./SortDropdown";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const ProductToolbar = () => {
   const [search, setSearch] = useState<string>("");
-  const [category, setCategory] = useState<string>('');
+  const [category, setCategory] = useState<CategoryOption>('All');
  const [sort, setSort] = useState<SortOption>("featured");
 const router = useRouter();
 const handleSearch = () => {
