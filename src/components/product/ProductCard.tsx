@@ -1,7 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "./ProductContainer";
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  discountPrice?: number;
+  images: string[];
+}
+
 
 interface ProductProps {
   product: Product;

@@ -6,13 +6,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-interface ProductFormData {
+export interface ProductFormData {
   name: string;
   category: string;
   brand: string;
   price: number;
-  discountPrice: string;
-  stock: string;
+  discountPrice: number | "";
+  stock: number | "";
   images: FileList | null;
   shortDescription: string;
   fullDescription: string;
@@ -24,8 +24,8 @@ const initialFormData: ProductFormData = {
   name: "",
   category: "",
   brand: "",
-  price:0 ,
-  discountPrice: "",
+  price: 0,
+  discountPrice: "",   
   stock: "",
   images: null,
   shortDescription: "",
@@ -46,12 +46,15 @@ const ProductForm = () => {
 
    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
    
-   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+ const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+) => {
+  const { name, value, type } = e.target;
+  setFormData((prev) => ({
+    ...prev,
+    [name]: type === "number" ? (value === "" ? "" : Number(value)) : value,
+  }));
+};
 
   const AVAILABLE_SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -96,10 +99,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       uploadedUrls = results.map((res) => res.data.display_url);
     }
 
-    const finalData = {
-      ...formData,
-      images: uploadedUrls, 
-    };
+   const finalData = {
+  ...formData,
+  price: Number(formData.price),
+  discountPrice: formData.discountPrice === "" ? null : Number(formData.discountPrice),
+  stock: formData.stock === "" ? 0 : Number(formData.stock),
+  images: uploadedUrls,
+};
 
     const res = await AddProduct(finalData);
     

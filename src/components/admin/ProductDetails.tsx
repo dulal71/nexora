@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 
 export interface Product {
   _id: string;
@@ -6,13 +6,12 @@ export interface Product {
   category: string;
   brand: string;
   price: number;
-  description?: string;
-  stock?: number;
-  images?: string[];
-  sizes?: string[];
-  colors?: string[];
-  createdAt?: string | Date;
-  updatedAt?: string | Date;
+  discountPrice?:number;
+  description: string;
+  stock: number;
+  images: string[];
+  sizes: string[];
+
 }
 
 interface ProductDetailsProps {
@@ -30,7 +29,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
     stock,
     images,
     sizes,
-    colors,
+    
   } = product;
 
   return (
@@ -103,16 +102,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 </dd>
               </>
             )}
-
-            {colors && colors.length > 0 && (
-              <>
-                <dt className="text-gray-500">Colors</dt>
-                <dd className="text-gray-900 font-medium">
-                  {colors.join(", ")}
-                </dd>
-              </>
-            )}
-          </dl>
+</dl>
 
           {description && (
             <div>

@@ -6,7 +6,9 @@ import { Product } from "./ProductDetails";
 import EditProductById from "@/lib/action/editProduct";
 import { toast } from "sonner";
 
-
+interface:product{
+  
+}
 
 interface ProductDetailsProps {
   product: Product;
@@ -19,7 +21,7 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
     category: product.category,
     brand: product.brand,
     price: Number(product.price),
-    stock: product.stock !== undefined ? String(product.stock) : "",
+    stock: Number(product.stock),
     description: product.description ?? "",
     sizes: product.sizes?.join(", ") ?? "",
    
@@ -43,8 +45,8 @@ const EditProduct = ({ product }: ProductDetailsProps) => {
         name: form.name,
         category: form.category,
         brand: form.brand,
-        price: form.price,
-        stock: form.stock ? Number(form.stock) : undefined,
+        price: Number(form.price),
+        stock: Number(form.stock),
         description: form.description,
         sizes: form.sizes
           ? form.sizes.split(",").map((s) => s.trim()).filter(Boolean)

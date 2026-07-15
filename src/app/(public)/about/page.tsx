@@ -3,10 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// app/about/page.tsx
-// Layout follows the provided design: centered "About Us" intro + store photo,
-// then a label/content row layout for Why We, Our Vision, Our Mission,
-// Contact Us, and Our Team. Replace image src values and copy with your own.
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -17,19 +14,19 @@ const team = [
   {
     name: 'Angela Robot',
     role: 'Founder & CEO',
-    image: '/team/angela.jpg',
+    image: '/team/angela.avif',
     bg: 'bg-[#E8A548]',
   },
   {
     name: 'Julia Wille',
     role: 'Co. Founder',
-    image: '/team/julia.jpg',
+    image: '/team/julia.avif',
     bg: 'bg-gray-200 dark:bg-gray-800',
   },
   {
     name: 'Steve Smith',
     role: 'Fashion Designer',
-    image: '/team/steve.jpg',
+    image: '/team/steve.avif',
     bg: 'bg-gray-200 dark:bg-gray-800',
   },
 ];
@@ -92,7 +89,7 @@ export default function AboutPage() {
           viewport={{ once: true }}
           variants={fadeUp}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mx-auto mt-6 max-w-2xl text-[15px] leading-7 text-gray-600 dark:text-gray-400"
+          className="mx-auto mt-6 max-w-2xl text-[15px] md:text-[18px] leading-7 text-gray-600 dark:text-gray-400"
         >
           As a certified Shopify Partner, we have been consistently creating
           top-performing premium Shopify themes since 2017. With over 15,000
@@ -112,7 +109,7 @@ export default function AboutPage() {
           className="relative mt-10 h-[280px] w-full overflow-hidden rounded-lg sm:h-[380px]"
         >
           <Image
-            src="/about/store-front.jpg"
+            src="/image/store-front.webp"
             alt="Our store interior"
             fill
             className="object-cover"
@@ -134,7 +131,7 @@ export default function AboutPage() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="grid grid-cols-1 gap-2 py-8 sm:grid-cols-4 sm:gap-6"
             >
-              <h2 className="text-xs font-bold tracking-wide text-gray-900 dark:text-white">
+              <h2 className="text-xl font-bold tracking-wide text-gray-900 dark:text-white">
                 {row.label}
               </h2>
               <div className="text-[15px] leading-7 text-gray-600 dark:text-gray-400 sm:col-span-3">

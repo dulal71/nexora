@@ -1,9 +1,9 @@
 'use server'
 
-import { secureFetch } from "../service/get";
+import {  serverFetch } from "../service/get";
 
 const getProductById =async (id:string) => {
-  return await secureFetch(`/api/product/${id}`)
+  return await serverFetch(`/api/product/${id}`)
 };
 
 export default getProductById;
