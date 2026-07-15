@@ -1,8 +1,11 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/shared/Navbar';
-import React from 'react';
+import { ReactNode } from 'react';
 
-const HomePageLayout = ({children}) => {
+interface HomePageLayoutProps {
+  children: ReactNode;
+}
+const HomePageLayout = ({children}:HomePageLayoutProps) => {
     return (
         <div>
          <Navbar></Navbar>  
