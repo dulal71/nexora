@@ -21,9 +21,7 @@ const UserProfile = async () => {
                 {user.name.toUpperCase()}
               </span>
               <span className="text-sm md:text-md text-gray-500 dark:text-gray-200 mt-2">Email : {user.email}</span>
-              {user.phone && (
-                <span className="text-sm text-gray-500 mt-2 dark:text-gray-200">phone : {user.phone}</span>
-              )}
+              
             </div>
           </div>
         ) : (

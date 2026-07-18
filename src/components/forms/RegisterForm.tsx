@@ -11,9 +11,7 @@ import { useSearchParams } from 'next/navigation';
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits")
-  .regex(/^\d+$/, "Phone number must contain only numbers"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string(),
  
 }).refine((data) => data.password === data.confirmPassword, {
@@ -65,12 +63,7 @@ const RegisterForm = () => {
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
-        {/* Phone */}
-        <div>
-          <label>Phone</label>
-          <input {...register("phone")} placeholder="Phone Number" className={inputStyles} />
-          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
-        </div>
+        
 
         {/* Password */}
         <div>
