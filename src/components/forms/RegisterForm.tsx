@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import useUserSignup from '@/lib/authService/userSignup';
-import { toast } from 'sonner';
+
 import useGoogleSignIn from '@/lib/authService/useGoogleSignIn';
 import { useSearchParams } from 'next/navigation';
 
