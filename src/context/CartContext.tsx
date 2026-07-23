@@ -13,7 +13,7 @@ interface CartItem {
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Omit<CartItem, "quantity">) => Promise<void>;
+  addToCart: (product: CartItem) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   isCartOpen: boolean;
   openCart: () => void;
@@ -37,15 +37,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setIsCartOpen(false);
   };
 
-  const addToCart = async (
-    product: Omit<CartItem, "quantity">
-  ): Promise<void> => {
-    const newItem: CartItem = {
-      ...product,
-      quantity: 1,
-    };
+  const addToCart = async (product:CartItem): Promise<void> => {
+  
+   setCartItems((prev) => {
+  const existingItem = prev.find(
+    (item) =>
+      item.productId === product.productId &&
+      item.size === product.size
+  );
 
-    setCartItems((prev) => [...prev, newItem]);
+  if (existingItem) {
+    return prev.map((item) =>
+      item.productId === product.productId &&
+      item.size === product.size
+        ? {
+            ...item,
+            quantity: item.quantity + product.quantity,
+          }
+        : item
+    );
+  }
+
+  return [...prev, product];
+});
   };
 
   const removeFromCart = async (productId: string): Promise<void> => {

@@ -12,7 +12,7 @@ interface NavActionsProps {
   openMenu: () => void;
 }
 const NavActions = ({openMenu}:NavActionsProps) => {
-   const { openCart,closeCart, isCartOpen,} = useCart();
+   const { openCart,cartItems} = useCart();
   return (
         <div className="flex items-center gap-4 text-gray-700 dark:text-gray-300">
           <ProfileDropdown></ProfileDropdown> 
@@ -25,7 +25,7 @@ const NavActions = ({openMenu}:NavActionsProps) => {
        
           <div className="relative cursor-pointer">
             <FiShoppingBag onClick={openCart} size={20} />
-            <span className="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            <span className="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">{cartItems.length}</span>
           </div>
           
           <div className="hidden md:block">

@@ -2,7 +2,15 @@ import Link from "next/link";
 import { FiHeart, FiMail, FiMinus, FiPlus, FiRotateCcw } from "react-icons/fi";
 import CheckoutModal from "../checkout/CheckoutModal";
 import { Product } from "./ProductDetailsView";
-
+import { useCart } from "@/context/CartContext";
+export interface ProductData {
+  id: string;
+  name: string;
+  price:number;
+  brand:string;
+  sizes:string[];
+  images: string[];
+}
 interface ProductActionsProps {
   product:Product
   quantity: number;
@@ -23,6 +31,20 @@ const ProductActions = ({
  setWishlisted,
  wishlisted,
 }:ProductActionsProps) => {
+ 
+  const {addToCart,cartItems}=useCart()
+  console.log(cartItems);
+  const productAddToCart=()=>{
+addToCart({
+ productId: product._id,
+      name: product.name,
+      size:selectedSize,
+      price: product.price,
+      image: product.images[0], 
+      quantity
+      
+})
+  }
     return (
         <>
               <div className="mt-4 flex items-center gap-3">
@@ -51,6 +73,7 @@ const ProductActions = ({
           </div>
 
           <button
+           onClick={productAddToCart}
             type="button"
             disabled={isOutOfStock}
             className="h-11 flex-1 rounded-full bg-neutral-900 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
