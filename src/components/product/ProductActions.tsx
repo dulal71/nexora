@@ -1,8 +1,11 @@
-import Link from "next/link";
+'use client'
 import { FiHeart, FiMail, FiMinus, FiPlus, FiRotateCcw } from "react-icons/fi";
 import CheckoutModal from "../checkout/CheckoutModal";
 import { Product } from "./ProductDetailsView";
 import { useCart } from "@/context/CartContext";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 export interface ProductData {
   id: string;
   name: string;
@@ -21,7 +24,7 @@ interface ProductActionsProps {
   incrementQuantity: () => void;
   setWishlisted: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const ProductActions = ({
+const ProductActions =({
   product,
    selectedSize,
  decrementQuantity ,
@@ -31,10 +34,17 @@ const ProductActions = ({
  setWishlisted,
  wishlisted,
 }:ProductActionsProps) => {
- 
-  const {addToCart,cartItems}=useCart()
-  console.log(cartItems);
+  console.log(product);
+    const {data: session }= authClient.useSession() 
+        const user = session?.user
+        const router= useRouter()
+  const {addToCart}=useCart()
+
   const productAddToCart=()=>{
+if (!user) {
+  router.push(`/login?redirect=/shop/${product._id}`);
+  return;
+}
 addToCart({
  productId: product._id,
       name: product.name,

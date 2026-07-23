@@ -155,19 +155,14 @@ const CheckoutPage = () => {
             <span>${total}</span>
           </div>
 
-          <button
-            onClick={handlePlaceOrder}
-            className="w-full bg-black text-white py-2 rounded-md hover:opacity-90 transition mt-2"
-          >
-            <form action="/api/checkout_sessions" method="POST">
-       <input type="hidden" name='price' value={total}></input>
-      <section>
-        <button type="submit" className="bg-[#f28b7f] px-4 rounded-full text-black" role="link">
+          <form action="/api/checkout_sessions" method="POST">
+     <input type="hidden" name='price' value={total}></input>
+      <section className="flex justify-center items-center">
+        <button type="submit" className="bg-red-700 px-4 text-white font-medium rounded-full cursor-pointer" role="link">
           Checkout
         </button>
       </section>
-    </form>  
-          </button>
+    </form>
         </div>
       </div>
     </div>
